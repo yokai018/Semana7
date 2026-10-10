@@ -1,0 +1,10 @@
+$color-encabezado: #17324d;
+$color-acento: #e76f32;
+$color-fondo: #f3f6f8;
+$color-texto: #263442;
+
+@mixin superficie {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgb(23 50 77 / 10%);
+}

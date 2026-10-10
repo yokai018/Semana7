@@ -1,0 +1,30 @@
+<section class="container py-4">
+<!-- Barra de búsqueda: #caja es una variable de referencia de plantilla -->
+<div class="barra mb-4">
+<input #caja type="search" class="form-control" placeholder="Buscar por nombre..."
+(input)="buscar(caja.value)" />
+<span class="text-secondary small text-nowrap">
+Mostrando {{ productosFiltrados().length }} de {{ productos().length }}
+</span>
+</div>
+<!-- Grid de dos columnas cuando hay un producto seleccionado -->
+<div class="contenido" [class.contenido--con-detalle]="seleccionado()">
+<div class="grilla">
+<!-- @for: repite la tarjeta por producto; track identifica cada uno -->
+@for (producto of productosFiltrados(); track producto.id) {
+<app-producto-card
+[producto]="producto"
+[seleccionado]="seleccionado()?.id === producto.id"
+(seleccionar)="mostrarDetalle($event)" />
+} @empty {
+<div class="alert alert-warning grilla__vacio">
+No hay productos que coincidan con "{{ filtro() }}".
+</div>
+}
+</div>
+<!-- @if: el panel solo existe cuando hay un producto seleccionado -->
+@if (seleccionado(); as producto) {
+<app-detalle-producto [producto]="producto" (cerrar)="cerrarDetalle()" />
+}
+</div>
+</section>
